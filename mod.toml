@@ -70,4 +70,6 @@ data_reference_syms_files = [ "Zelda64RecompSyms/mm.us.rev1.datasyms.toml", "Zel
 mod_filename = "mm_forms_use_more_items_0.1.1"
 
 # Additional files to include in the mod.
-additional_files = [ ]
+additional_files = [
+    "thumb.dds"
+]

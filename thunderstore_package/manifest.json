@@ -1,0 +1,7 @@
+{
+    "name": "mm_forms_use_more_items",
+    "version_number": "0.1.1",
+    "website_url": "https://github.com/LT-Schmiddy/mm-forms-use-more-items.git",
+    "description": "Always perform a quickspin when swinging your sword.",
+    "dependencies": []
+}
