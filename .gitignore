@@ -8,6 +8,8 @@
 *.pdb
 *.exp
 *.pyc
+*.thunderstore.zip
+*.nrm
 ./funcs.h
 patches.map
 build/

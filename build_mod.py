@@ -12,12 +12,12 @@ build_nrm_file = build_dir.joinpath(f"{mod_data['inputs']['mod_filename']}.nrm")
 runtime_mods_dir = project_root.joinpath("runtime/mods")
 runtime_nrm_file = runtime_mods_dir.joinpath(f"{mod_data['inputs']['mod_filename']}.nrm")
 
-def build_mod():
+def run_build():
     if not bnt.build_dir.exists():
         print("N64Recomp tools not built. Building now...")
         bnt.rebuild_tools();
 
-    deps = bnt.get_dependencies()
+    deps = bnt.deps
 
     make_run = subprocess.run(
         [
@@ -46,4 +46,4 @@ def build_mod():
     shutil.copy(build_nrm_file, runtime_nrm_file)
 
 if __name__ == '__main__':
-    build_mod()
+    run_build()

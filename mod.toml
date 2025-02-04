@@ -5,16 +5,16 @@
 
 # Unique ID of this mod. Pick something long enough that it'll never be the same as any other mod.
 # The name displayed in the mod management menu is separate from this so this doesn't need to be human readable.
-id = "mm_forms_use_more_items"
+id = "Forms_Use_More_Items"
 
 # Version of this mod.
-version = "0.1.1"
+version = "1.0.0"
 
 # The name that will show up for this mod in the mod menu. This should be human readable.
-display_name = "Forms use more items"
+display_name = "Forms Use More Items"
 
 # The description that will show up when this mod is displayed in the mod menu. This should be human readable.
-description =  """Allows Link's transformation to use a few more items than they normally can.
+description =  """Enables Link's transformation to use a few more items than they normally can.
 Deku Link:
 * Deku Sticks
 * Magic Beans
@@ -34,7 +34,7 @@ Zora Link:
 
 # A short description that will show up in this mod's entry in the mod list. This should be human readable and kept short
 # to prevent it from being cut off due to the limited space.
-short_description = "Always perform a quickspin when swinging your sword."
+short_description = "Allows Link's transformation to use a few more items than they normally can."
 
 # Authors of this mod.
 authors = [ "LT_Schmiddy" ]
@@ -67,7 +67,7 @@ elf_path = "build/mod.elf"
 func_reference_syms_file = "Zelda64RecompSyms/mm.us.rev1.syms.toml"
 data_reference_syms_files = [ "Zelda64RecompSyms/mm.us.rev1.datasyms.toml", "Zelda64RecompSyms/mm.us.rev1.datasyms_static.toml" ]
 
-mod_filename = "mm_forms_use_more_items_0.1.1"
+mod_filename = "mm_forms_use_more_items_1.0.0"
 
 # Additional files to include in the mod.
 additional_files = [

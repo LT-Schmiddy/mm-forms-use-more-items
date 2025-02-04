@@ -1,17 +1,21 @@
-# Forms use more items
+# Forms Use More Items
 
-Allows Link's transformation to use a few more items than they normally can.
-Deku Link:
+Enables Link's transformation to use a few more items than they normally can.
+
+Deku Link can now use:
+
 * Deku Sticks
 * Magic Beans
 
-Goron Link:
+Goron Link can now use:
+
 * Bombs
 * Bombchus
 * Deku Nuts
 * Magic Beans
 
-Zora Link:
+Zora Link can now use:
+
 * Bombs
 * Bombchus
 * Deku Sticks
