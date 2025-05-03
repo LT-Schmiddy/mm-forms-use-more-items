@@ -8,7 +8,7 @@
 id = "Forms_Use_More_Items"
 
 # Version of this mod.
-version = "1.0.0"
+version = "1.0.1"
 
 # The name that will show up for this mod in the mod menu. This should be human readable.
 display_name = "Forms Use More Items"
@@ -67,7 +67,7 @@ elf_path = "build/mod.elf"
 func_reference_syms_file = "Zelda64RecompSyms/mm.us.rev1.syms.toml"
 data_reference_syms_files = [ "Zelda64RecompSyms/mm.us.rev1.datasyms.toml", "Zelda64RecompSyms/mm.us.rev1.datasyms_static.toml" ]
 
-mod_filename = "mm_forms_use_more_items_1.0.0"
+mod_filename = "mm_forms_use_more_items"
 
 # Additional files to include in the mod.
 additional_files = [
