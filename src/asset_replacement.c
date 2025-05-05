@@ -4,13 +4,13 @@
 #include "gLinkZoraHookshotSkel.h"
 #include "gLinkZoraBow3rdPersonSkel.h"
 #include "gGreatFairySword.h"
+#include "gHookshot.h"
+
 
 extern Gfx* sPlayerFirstPersonRightShoulderDLs[PLAYER_FORM_MAX];
 extern Gfx* sPlayerFirstPersonRightHandDLs[PLAYER_FORM_MAX];
 extern Gfx* sPlayerFirstPersonRightHandHookshotDLs[PLAYER_FORM_MAX];
 extern Gfx* gPlayerRightHandClosedDLs[2 * PLAYER_FORM_MAX];
-extern Gfx gLinkHumanHookshotDL[];
-extern Gfx gLinkHumanBowDL[];
 
 extern Gfx gLinkZoraRightHandClosedDL[];
 extern Gfx* gPlayerRightHandHookshotDLs[2 * PLAYER_FORM_MAX];
@@ -23,7 +23,7 @@ extern Gfx gLinkHumanGreatFairysSwordDL[];
 
 Gfx gLinkZoraRightHandHoldingHookshotDL[] = {
     gsSPDisplayList(gLinkZoraRightHandClosedDL),
-    gsSPBranchList(gLinkHumanHookshotDL),
+    gsSPBranchList(gHookshot),
 };
 
 Gfx gLinkZoraRightHandShoulderAndForearm[] = {
