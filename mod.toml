@@ -30,14 +30,19 @@ Zora Link:
 * Bombchus
 * Deku Sticks
 * Deku Nuts
-* Magic Beans"""
+* Magic Beans
+* Bow
+* Hookshot
+
+Special Thanks to Reonu for creating the assets for Zora Link to use the bow and hookshot!
+"""
 
 # A short description that will show up in this mod's entry in the mod list. This should be human readable and kept short
 # to prevent it from being cut off due to the limited space.
 short_description = "Allows Link's transformation to use a few more items than they normally can."
 
 # Authors of this mod.
-authors = [ "LT_Schmiddy" ]
+authors = [ "LT_Schmiddy", "Reonu" ]
 
 # ID of the target recomp game.
 game_id = "mm"
