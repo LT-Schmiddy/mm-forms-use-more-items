@@ -13,7 +13,6 @@ static u8 overwrite_PlayerFormSlotRestrictions[PLAYER_FORM_MAX][ITEM_NUM_SLOTS];
 // Helper functions:
 void set_item_restriction(PlayerTransformation transform, ItemId item, u8 allowed) {
     gPlayerFormItemRestrictions[transform][item] = allowed;
-    // overwrite_PlayerFormItemRestrictions[transform][item] = allowed;
     overwrite_PlayerFormSlotRestrictions[transform][SLOT(item)] = allowed;
     
 }
@@ -57,6 +56,7 @@ RECOMP_CALLBACK("*", recomp_after_play_init) void modify_item_restriction_table(
     set_item_restriction(PLAYER_FORM_ZORA, ITEM_BOW_LIGHT, 1);
     set_item_restriction(PLAYER_FORM_ZORA, ITEM_HOOKSHOT, 1);
 
+    // Fierce Deity
     set_item_restriction(PLAYER_FORM_FIERCE_DEITY, ITEM_BOMB, 1);
     set_item_restriction(PLAYER_FORM_FIERCE_DEITY, ITEM_BOMBCHU, 1);
     set_item_restriction(PLAYER_FORM_FIERCE_DEITY, ITEM_DEKU_NUT, 1);
