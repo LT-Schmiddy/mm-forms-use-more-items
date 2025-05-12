@@ -3,5 +3,7 @@
     "version_number": "1.0.1",
     "website_url": "https://github.com/LT-Schmiddy/mm-forms-use-more-items",
     "description": "Allows Link's transformation to use a few more items than they normally can.",
-    "dependencies": []
+    "dependencies": [
+        "ProxyMM-ObjDepLoader-0.0.3"
+    ]
 }
