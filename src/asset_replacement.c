@@ -82,14 +82,25 @@ RECOMP_IMPORT("ProxyMM_ObjDepLoader", void ObjDepLoader_Unload(PlayState* play, 
 PlayState* sPlayState;
 static bool sShouldUnloadForPostLimbDraw = false;
 RECOMP_HOOK("Player_PostLimbDrawGameplay") void on_Player_PostLimbDrawGameplay(PlayState* play, s32 limbIndex, Gfx** dList1, Gfx** dList2, Vec3s* rot, Actor* actor) {
+    sPlayState = play;
+    Player* player = GET_PLAYER(play);
+    if (player->transformation != PLAYER_FORM_ZORA) {
+        return;
+    }
+
     if (limbIndex == PLAYER_LIMB_RIGHT_HAND) {
         sShouldUnloadForPostLimbDraw = true;
         ObjDepLoader_Load(play, 0x6, OBJECT_LINK_CHILD);
     }
-    sPlayState = play;
+
 }
 
 RECOMP_HOOK_RETURN("Player_PostLimbDrawGameplay") void return_PostLimbDrawGameplay(void) {
+    Player* player = GET_PLAYER(sPlayState);
+    if (player->transformation != PLAYER_FORM_ZORA) {
+        return;
+    }
+
     if (sShouldUnloadForPostLimbDraw) {
         sShouldUnloadForPostLimbDraw = false;
         ObjDepLoader_Unload(sPlayState, 0x6, OBJECT_LINK_CHILD);
@@ -98,12 +109,23 @@ RECOMP_HOOK_RETURN("Player_PostLimbDrawGameplay") void return_PostLimbDrawGamepl
 
 static bool sShouldUnloadForArmsHook = false;
 RECOMP_HOOK("ArmsHook_Draw") void on_ArmsHook_Draw(Actor* thisx, PlayState* play) {
+    sPlayState = play;
+    
+    Player* player = GET_PLAYER(play);
+    if (player->transformation != PLAYER_FORM_ZORA) {
+        return;
+    }
+
     sShouldUnloadForArmsHook = true;
     ObjDepLoader_Load(play, 0x6, OBJECT_LINK_CHILD);
-    sPlayState = play;
 }
 
 RECOMP_HOOK_RETURN("ArmsHook_Draw") void return_ArmsHook_Draw(void) {
+    Player* player = GET_PLAYER(sPlayState);
+    if (player->transformation != PLAYER_FORM_ZORA) {
+        return;
+    }
+
     if (sShouldUnloadForArmsHook) {
         sShouldUnloadForArmsHook = false;
         ObjDepLoader_Unload(sPlayState, 0x6, OBJECT_LINK_CHILD);
