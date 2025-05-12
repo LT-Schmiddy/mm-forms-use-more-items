@@ -12,21 +12,21 @@ CFLAGS   := -target mips -mips2 -mabi=32 -O2 -G0 -mno-abicalls -mno-odd-spreg -m
 CPPFLAGS := -nostdinc -D_LANGUAGE_C -DMIPS -I include -I include/dummy_headers -I mm-decomp/include -I mm-decomp/src -I mm-decomp/assets
 LDFLAGS  := -nostdlib -T $(LDSCRIPT) -Map $(BUILD_DIR)/mod.map --unresolved-symbols=ignore-all --emit-relocs -e 0 --no-nmagic
 
-C_SRCS := $(wildcard src/*.c)
+C_SRCS := $(wildcard src/*.c) $(wildcard src/models/*.c)
 C_OBJS := $(addprefix $(BUILD_DIR)/, $(C_SRCS:.c=.o))
 C_DEPS := $(addprefix $(BUILD_DIR)/, $(C_SRCS:.c=.d))
 
 $(TARGET): $(C_OBJS) $(LDSCRIPT) | $(BUILD_DIR)
 	$(LD) $(C_OBJS) $(LDFLAGS) -o $@
 
-$(BUILD_DIR) $(BUILD_DIR)/src:
+$(BUILD_DIR) $(BUILD_DIR)/src $(BUILD_DIR)/src/models:
 ifeq ($(OS),Windows_NT)
 	mkdir $(subst /,\,$@)
 else
 	mkdir -p $@
 endif
 
-$(C_OBJS): $(BUILD_DIR)/%.o : %.c | $(BUILD_DIR) $(BUILD_DIR)/src
+$(C_OBJS): $(BUILD_DIR)/%.o : %.c | $(BUILD_DIR) $(BUILD_DIR)/src $(BUILD_DIR)/src/models
 	$(CC) $(CFLAGS) $(CPPFLAGS) $< -MMD -MF $(@:.o=.d) -c -o $@
 
 clean:
