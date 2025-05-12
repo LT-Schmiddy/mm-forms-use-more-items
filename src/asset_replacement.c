@@ -24,6 +24,7 @@ extern Gfx gLinkZoraRightHandClosedDL[];
 extern Gfx* gPlayerRightHandHookshotDLs[2 * PLAYER_FORM_MAX];
 extern Gfx* gPlayerRightHandBowDLs[2 * PLAYER_FORM_MAX];
 extern Gfx* sPlayerFirstPersonLeftHandDLs[PLAYER_FORM_MAX];
+extern Gfx* sPlayerFirstPersonLeftForearmDLs[PLAYER_FORM_MAX];
 
 extern Gfx* gPlayerLeftHandTwoHandSwordDLs[2 * PLAYER_FORM_MAX];
 
