@@ -23,6 +23,8 @@ extern Gfx* gPlayerRightHandClosedDLs[2 * PLAYER_FORM_MAX];
 extern Gfx gLinkZoraRightHandClosedDL[];
 extern Gfx* gPlayerRightHandHookshotDLs[2 * PLAYER_FORM_MAX];
 extern Gfx* gPlayerRightHandBowDLs[2 * PLAYER_FORM_MAX];
+extern Gfx* sPlayerFirstPersonLeftHandDLs[PLAYER_FORM_MAX];
+extern Gfx* sPlayerFirstPersonLeftForearmDLs[PLAYER_FORM_MAX];
 
 extern Gfx* gPlayerLeftHandTwoHandSwordDLs[2 * PLAYER_FORM_MAX];
 
@@ -53,6 +55,7 @@ RECOMP_HOOK("Player_Init") void on_Player_Init(Actor* thisx, PlayState* play) {
     gPlayerRightHandBowDLs[PLAYER_FORM_ZORA * 2 + 0] = gLinkZoraBow3rdPersonSkel_bone018_gLinkZoraRightHandLimb_mesh_layer_Opaque;
     gPlayerRightHandBowDLs[PLAYER_FORM_ZORA * 2 + 1] = gLinkZoraBow3rdPersonSkel_bone018_gLinkZoraRightHandLimb_mesh_layer_Opaque;
     sPlayerFirstPersonRightHandHookshotDLs[PLAYER_FORM_ZORA] = gLinkZoraHookshotSkel_bone018_gLinkZoraRightHandLimb_mesh_layer_Opaque;
+    sPlayerFirstPersonLeftHandDLs[PLAYER_FORM_ZORA] = gLinkZoraBowSkel_bone015_gLinkZoraLeftHandLimb_mesh_layer_Opaque;
 
     // Deku Link
     gPlayerLeftHandTwoHandSwordDLs[PLAYER_FORM_DEKU * 2 + 0] = gLinkDekuHoldingGreatFairySwordDL;
@@ -115,4 +118,30 @@ RECOMP_HOOK_RETURN("func_80126BD0") void return_func_80126BD0(void) {
 
 RECOMP_HOOK("Player_OverrideLimbDrawGameplayFirstPerson") void on_Player_OverrideLimbDrawGameplayFirstPerson(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, Actor* actor) {
     gShouldSkipFins = true;
+}
+
+// Move drawn arrow's starting point from bow
+#define MOVEARROWX 300
+#define MOVEARROWY -200
+#define MOVEARROWZ -100
+
+RECOMP_HOOK ("Player_PostLimbDrawGameplay") void on_PostLimbDrawGameplay(PlayState* play, s32 limbIndex, Gfx** dList1, Gfx** dList2, Vec3s* rot, Actor* actor) {
+    Player* player = (Player*) actor;
+    if (limbIndex == PLAYER_LIMB_LEFT_HAND && player->actor.scale.y >= 0.0f) {
+        Actor* heldActor;
+        MtxF sp230;
+        if (!Player_IsHoldingHookshot(player) && ((heldActor = player->heldActor) != NULL)) {
+            if ((player->stateFlags3 & PLAYER_STATE3_40) && (player->transformation != PLAYER_FORM_DEKU)) {
+                if (player->transformation == PLAYER_FORM_ZORA) {
+                    Vec3s* temp_s1;
+                    Matrix_Translate(MOVEARROWX, MOVEARROWY, MOVEARROWZ, MTXMODE_APPLY);    // Move arrow's drawn position
+    
+                    Matrix_Get(&sp230);
+                    temp_s1 = &heldActor->world.rot;
+                    Matrix_MtxFToYXZRot(&sp230, temp_s1, false);
+                    heldActor->shape.rot = *temp_s1;
+                }
+            }
+        }
+    }
 }
