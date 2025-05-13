@@ -17,3 +17,4 @@ runtime/
 .vscode/settings.json
 .vscode/launch.json
 .vscode/tasks.json
+/assets_extracted
