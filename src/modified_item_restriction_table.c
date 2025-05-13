@@ -51,10 +51,14 @@ RECOMP_CALLBACK("*", recomp_after_play_init) void modify_item_restriction_table(
     set_item_restriction(PLAYER_FORM_ZORA, ITEM_DEKU_NUT, 1);
     set_item_restriction(PLAYER_FORM_ZORA, ITEM_MAGIC_BEANS, 1);
     set_item_restriction(PLAYER_FORM_ZORA, ITEM_BOW, 1);
-    set_item_restriction(PLAYER_FORM_ZORA, ITEM_BOW_FIRE, 1);
-    set_item_restriction(PLAYER_FORM_ZORA, ITEM_BOW_ICE, 1);
-    set_item_restriction(PLAYER_FORM_ZORA, ITEM_BOW_LIGHT, 1);
+    set_item_restriction(PLAYER_FORM_ZORA, ITEM_ARROW_FIRE , 1);
+    set_item_restriction(PLAYER_FORM_ZORA, ITEM_ARROW_ICE, 1);
+    set_item_restriction(PLAYER_FORM_ZORA, ITEM_ARROW_LIGHT, 1);
     set_item_restriction(PLAYER_FORM_ZORA, ITEM_HOOKSHOT, 1);
+    // Extra declarations for the elemental arrows:
+    gPlayerFormItemRestrictions[PLAYER_FORM_ZORA][ITEM_BOW_FIRE] = 1;
+    gPlayerFormItemRestrictions[PLAYER_FORM_ZORA][ITEM_BOW_ICE] = 1;
+    gPlayerFormItemRestrictions[PLAYER_FORM_ZORA][ITEM_BOW_LIGHT] = 1;
 
     // Fierce Deity
     set_item_restriction(PLAYER_FORM_FIERCE_DEITY, ITEM_BOMB, 1);
