@@ -1,5 +1,6 @@
 #include "modding.h"
 #include "global.h"
+#include "recomputils.h"
 
 #include "overlays/actors/ovl_En_Syateki_Man/z_en_syateki_man.h"
 #include "overlays/actors/ovl_En_Syateki_Crow/z_en_syateki_crow.h"
@@ -56,61 +57,38 @@ static AnimationInfo sAnimationInfo[] = {
     { &gBurlyGuyHeadScratchEndAnim, 1.0f, 0.0f, 0.0f, ANIMMODE_ONCE, -8.0f },  // SG_MAN_ANIM_HEAD_SCRATCH_END
 };
 
-// Enabling the Zora Link to use the Swamp Shooting Gallery:
-RECOMP_PATCH void EnSyatekiMan_Swamp_Idle(EnSyatekiMan* this, PlayState* play) {
-    Player* player = GET_PLAYER(play);
-
-    if (Actor_ProcessTalkRequest(&this->actor, &play->state)) {
-        u16 faceReactionTextId;
-
-        Actor_ChangeAnimationByInfo(&this->skelAnime, sAnimationInfo, SG_MAN_ANIM_HEAD_SCRATCH_END);
-        faceReactionTextId = Text_GetFaceReaction(play, FACE_REACTION_SET_SWAMP_SHOOTING_GALLERY_MAN);
-        if (faceReactionTextId != 0) {
-            Message_StartTextbox(play, faceReactionTextId, &this->actor);
-            this->prevTextId = faceReactionTextId;
-        } else if (player->transformation == PLAYER_FORM_HUMAN || player->transformation == PLAYER_FORM_ZORA) {
-            if (this->talkFlags == TALK_FLAG_NONE) {
-                this->talkFlags = TALK_FLAG_SWAMP_HAS_SPOKEN_WITH_HUMAN;
-                // How are you? Wanna play?
-                Message_StartTextbox(play, 0xA28, &this->actor);
-                this->prevTextId = 0xA28;
-            } else {
-                // Won't you play?
-                Message_StartTextbox(play, 0xA29, &this->actor);
-                this->prevTextId = 0xA29;
-            }
-        } else {
-            switch (CURRENT_DAY) {
-                case 1:
-                    // You can't play if you don't have a bow! (Day 1)
-                    Message_StartTextbox(play, 0xA38, &this->actor);
-                    this->prevTextId = 0xA38;
-                    break;
-
-                case 2:
-                    // You can't play if you don't have a bow! (Day 2)
-                    Message_StartTextbox(play, 0xA39, &this->actor);
-                    this->prevTextId = 0xA39;
-                    break;
-
-                case 3:
-                    // You can't play if you don't have a bow! (Day 3)
-                    Message_StartTextbox(play, 0xA3A, &this->actor);
-                    this->prevTextId = 0xA3A;
-                    break;
-            }
-        }
-        this->actionFunc = EnSyatekiMan_Swamp_Talk;
-    } else {
-        Actor_OfferTalk(&this->actor, play, 120.0f);
-    }
-
-    if (player->actor.world.pos.z < 135.0f) {
-        player->actor.world.pos.z = 135.0f;
+static Player* sPlayer = NULL;
+static u8 oldTransform = 0;
+RECOMP_HOOK("Interface_DrawBButtonIcons") void pre_Interface_DrawBButtonIcons(PlayState* play){
+    sPlayer = GET_PLAYER(play);
+    // In a shooting gallery:
+    if (gSaveContext.minigameStatus == MINIGAME_STATUS_ACTIVE) {
+        recomp_printf("In Mini-game: %i\n", gSaveContext.minigameStatus);
+        oldTransform = sPlayer->transformation;
+        sPlayer->transformation = PLAYER_FORM_HUMAN;
     }
 }
 
-// A little cursed, NGL.
+RECOMP_HOOK_RETURN("Interface_DrawBButtonIcons") void post_Interface_DrawBButtonIcons(PlayState* play){
+    if (gSaveContext.minigameStatus == MINIGAME_STATUS_ACTIVE) {
+        sPlayer->transformation = oldTransform;
+    }
+}
+
+// Enabling the Zora Link to use the Swamp Shooting Gallery:
+RECOMP_HOOK("EnSyatekiMan_Swamp_Idle") void pre_EnSyatekiMan_Swamp_Idle(EnSyatekiMan* this, PlayState* play){
+    sPlayer = GET_PLAYER(play);
+    // In a shooting gallery:
+    oldTransform = sPlayer->transformation;
+    sPlayer->transformation = PLAYER_FORM_HUMAN;
+}
+
+RECOMP_HOOK_RETURN("EnSyatekiMan_Swamp_Idle") void post_EnSyatekiMan_Swamp_Idle(EnSyatekiMan* this, PlayState* play){
+    sPlayer->transformation = oldTransform;
+}
+
+
+// Town Shooting Gallery. A little cursed, NGL.
 RECOMP_PATCH void EnSyatekiMan_Town_StartIntroTextbox(EnSyatekiMan* this, PlayState* play) {
     switch (GET_PLAYER_FORM) {
         case PLAYER_FORM_HUMAN:
