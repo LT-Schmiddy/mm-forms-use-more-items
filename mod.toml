@@ -52,7 +52,8 @@ minimum_recomp_version = "1.2.0"
 
 # Dependency mods. Each entry is the mod's ID and then an optional minimum version of the dependency mod.
 dependencies = [
-    "ProxyMM_ObjDepLoader"
+    "ProxyMM_ObjDepLoader:0.0.3",
+    "MM_EZ_Text_Replacer_API:2.0.0"
 ]
 
 # Native libraries (e.g. DLLs) and the functions they export.
