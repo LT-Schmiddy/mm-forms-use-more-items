@@ -169,7 +169,7 @@ RECOMP_HOOK ("Player_PostLimbDrawGameplay") void on_PostLimbDrawGameplay(PlaySta
         MtxF sp230;
         if (!Player_IsHoldingHookshot(player) && ((heldActor = player->heldActor) != NULL)) {
             if ((player->stateFlags3 & PLAYER_STATE3_40) && (player->transformation != PLAYER_FORM_DEKU)) {
-                if (player->transformation == PLAYER_FORM_ZORA) {
+                if (player->transformation == PLAYER_FORM_ZORA && gShouldSkipFins) {
                     Vec3s* temp_s1;
                     Matrix_Translate(MOVEARROWX, MOVEARROWY, MOVEARROWZ, MTXMODE_APPLY);    // Move arrow's drawn position
     
