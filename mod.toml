@@ -8,33 +8,40 @@
 id = "Forms_Use_More_Items"
 
 # Version of this mod.
-version = "1.0.1"
+version = "2.0.0"
 
 # The name that will show up for this mod in the mod menu. This should be human readable.
 display_name = "Forms Use More Items"
 
 # The description that will show up when this mod is displayed in the mod menu. This should be human readable.
-description =  """Enables Link's transformation to use a few more items than they normally can.
+description =  """Enables Link's transformation to use more items than they normally can.
+
 Deku Link:
+
 * Deku Sticks
 * Magic Beans
+* Great Fairy Sword
 
 Goron Link:
+
 * Bombs
 * Bombchus
 * Deku Nuts
 * Magic Beans
 
 Zora Link:
+
 * Bombs
 * Bombchus
 * Deku Sticks
 * Deku Nuts
 * Magic Beans
-* Bow
+* Bow (and Magic Arrows)
 * Hookshot
 
-Special Thanks to Reonu for creating the assets for Zora Link to use the bow and hookshot!
+Special thanks to Reonu for creating and implementing the assets for Zora Link to use the Bow and Hookshot! This update wouldn't have happened without him!
+
+Additional thanks to ProxyMM for the `ObjDepLoader` library (and for helping us troubleshoot all the crashes we were having).
 """
 
 # A short description that will show up in this mod's entry in the mod list. This should be human readable and kept short

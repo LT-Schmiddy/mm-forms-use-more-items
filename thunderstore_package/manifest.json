@@ -1,9 +1,10 @@
 {
     "name": "Forms_Use_More_Items",
-    "version_number": "1.0.1",
+    "version_number": "2.0.0",
     "website_url": "https://github.com/LT-Schmiddy/mm-forms-use-more-items",
     "description": "Allows Link's transformation to use a few more items than they normally can.",
     "dependencies": [
-        "ProxyMM-ObjDepLoader-0.0.3"
+        "ProxyMM-ObjDepLoader-0.0.3",
+        "LT_Schmiddy-EZ_Text_Replacer_API-2.0.0"
     ]
 }
