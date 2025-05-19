@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.1
+
+* Improved UVs on Zora Link's hand in first person.
+
 ## 2.0.0
 
 * Zora Link can now use the Bow and Hookshot.
