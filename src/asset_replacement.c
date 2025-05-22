@@ -226,3 +226,25 @@ RECOMP_PATCH s32 func_80830E30(Player* this, PlayState* play) {
 
     return true;
 }
+
+// Fixed Deku Link's soft lock when recoiling, since he doesn't have that animation.
+// So, we just force him to use Human Link's.
+static Player* captured_player;
+static bool revert_to_deku = false;
+RECOMP_HOOK("func_808400CC") void pre_func_808400CC(PlayState* play, Player* this) {
+    captured_player = this;
+
+    if (this->transformation == PLAYER_FORM_DEKU) {
+        revert_to_deku = true;
+        this->transformation = PLAYER_FORM_HUMAN;
+    }
+}
+
+RECOMP_HOOK_RETURN("func_808400CC") void post_func_808400CC(PlayState* play, Player* this) {
+    if (revert_to_deku) {
+        revert_to_deku = false;
+        this->transformation = PLAYER_FORM_DEKU;
+    }
+    
+}
+
