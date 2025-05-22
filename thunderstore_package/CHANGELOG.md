@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.2
+
+* Fixed softlocking issue on Deku Link using Great Fairy Sword.
+
 ## 2.0.1
 
 * Improved UVs on Zora Link's hand in first person.
